@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homepage</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">GAMEPORTAL</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-lg-center">
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./html/about.html">About us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./html/releases.html"
+                >Release Calendar</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./html/gallery.html">Gallery</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./html/contact.html">Contact</a>
+            </li>
+            <li class="nav-item ms-lg-3" data-auth-guest>
+              <a
+                class="btn btn-outline-danger btn-sm my-1"
+                href="html/contact.html#registration-form"
+              >
+                Sign in
+              </a>
+            </li>
+
+            <li class="nav-item d-none" data-auth-user>
+              <span class="navbar-text auth-greeting" data-auth-name></span>
+            </li>
+
+            <li class="nav-item d-none" data-auth-user>
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm my-1"
+                data-auth-logout
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <div class="container my-4">
+        <section class="hero-section text-start">
+          <div class="col-lg-7">
+            <span class="badge bg-danger mb-2">Main Announcement</span>
+            <h1 class="display-4 fw-bold text-white">Grand Theft Auto VI</h1>
+            <p class="lead text-white">
+              A first look at the return to Vice City. Full details on the
+              upcoming blockbuster, a trailer breakdown, and plot specifics.
+            </p>
+            <a href="#" class="btn btn-custom mt-2" data-article="gta6"
+              >Read more</a
+            >
+          </div>
+        </section>
+
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="sidebar-box">
+              <h4 class="sidebar-title">Top 5 of the week</h4>
+
+              <div id="top-news-list" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+            <div
+              class="d-flex flex-wrap justify-content-between align-items-center gap-2 border-bottom border-danger pb-2 mb-3"
+            >
+              <h3 class="mb-0">Latest news</h3>
+              <button
+                type="button"
+                id="news-refresh"
+                class="btn btn-sm btn-outline-light"
+              >
+                <i class="bi bi-arrow-clockwise"></i> Refresh
+              </button>
+            </div>
+
+            <form
+              id="news-search-form"
+              class="news-search mb-3"
+              role="search"
+              novalidate
+            >
+              <label for="news-search" class="visually-hidden"
+                >Search gaming news</label
+              >
+              <div class="input-group">
+                <input
+                  type="search"
+                  id="news-search"
+                  class="form-control"
+                  placeholder="Search gaming news, e.g. Elden Ring"
+                  maxlength="50"
+                  autocomplete="off"
+                />
+                <button type="submit" class="btn btn-custom">
+                  <i class="bi bi-search"></i> Search
+                </button>
+              </div>
+            </form>
+
+            <div
+              id="news-filters"
+              class="d-flex flex-wrap gap-2 mb-3"
+              role="group"
+              aria-label="News topics"
+            >
+              <button
+                type="button"
+                class="news-filter-btn active"
+                data-topic="all"
+                aria-pressed="true"
+              >
+                All
+              </button>
+              <button
+                type="button"
+                class="news-filter-btn"
+                data-topic="pc"
+                aria-pressed="false"
+              >
+                PC
+              </button>
+              <button
+                type="button"
+                class="news-filter-btn"
+                data-topic="console"
+                aria-pressed="false"
+              >
+                Consoles
+              </button>
+              <button
+                type="button"
+                class="news-filter-btn"
+                data-topic="esports"
+                aria-pressed="false"
+              >
+                Esports
+              </button>
+              <button
+                type="button"
+                class="news-filter-btn"
+                data-topic="industry"
+                aria-pressed="false"
+              >
+                Industry
+              </button>
+            </div>
+
+            <p
+              id="news-status"
+              class="small text-secondary mb-3"
+              role="status"
+              aria-live="polite"
+            ></p>
+
+            <div
+              id="news-error"
+              class="alert alert-danger d-none align-items-center justify-content-between gap-3"
+              role="alert"
+            >
+              <span id="news-error-text"></span>
+              <button
+                type="button"
+                id="news-retry"
+                class="btn btn-sm btn-outline-light"
+              >
+                Try again
+              </button>
+            </div>
+
+            <div id="news-empty" class="news-state d-none">
+              <i class="bi bi-search fs-2 d-block mb-2"></i>
+              <p class="mb-0">Nothing found. Try another keyword or topic.</p>
+            </div>
+
+            <div id="news-grid" class="row row-cols-1 row-cols-md-2 g-4"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="text-center text-white bg-dark py-4 mt-5">
+      <div class="container">
+        <div class="mb-2">
+          <a href="#" class="text-secondary text-decoration-none me-3"
+            ><i class="bi bi-discord"></i> Discord</a
+          >
+          <a href="#" class="text-secondary text-decoration-none me-3"
+            ><i class="bi bi-youtube"></i> YouTube</a
+          >
+          <a href="#" class="text-secondary text-decoration-none"
+            ><i class="bi bi-telegram"></i> Telegram</a
+          >
+        </div>
+        <p class="small text-secondary mb-0">
+          &copy; 2026 GAMEPORTAL. All rights reserved. &middot; News via
+          <a
+            href="https://gnews.io/"
+            class="text-secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GNews</a
+          >
+        </p>
+
+        <p class="small text-secondary mt-3">
+          Claude assisted with reviewing, debugging, and formatting the API
+          integration code.
+        </p>
+      </div>
+    </footer>
+    <div
+      class="modal fade"
+      id="articleModal"
+      tabindex="-1"
+      aria-labelledby="articleModalTitle"
+      aria-hidden="true"
+      data-bs-theme="dark"
+    >
+      <div
+        class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+      >
+        <div class="modal-content bg-dark text-white">
+          <div class="modal-header border-secondary">
+            <h5 class="modal-title" id="articleModalTitle"></h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <img
+              id="articleModalImg"
+              class="img-fluid rounded mb-3 d-none"
+              alt=""
+            />
+            <div id="articleModalTags" class="mb-3"></div>
+            <div id="articleModalBody"></div>
+          </div>
+          <div class="modal-footer border-secondary">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
